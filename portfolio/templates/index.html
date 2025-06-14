@@ -1,270 +1,719 @@
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Портфолио Студента</title>
-  <!-- Добавление Source Code Pro шрифта -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Source Code Pro', monospace;
-      margin: 0;
-      padding: 0;
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
-    header {
-      background: rgba(51, 51, 51, 0.9);
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-      margin: 0.5rem 0 0;
-    }
-    nav ul li {
-      margin: 0 1rem;
-    }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    main {
-      padding: 2rem;
-    }
-    section {
-      margin-bottom: 2rem;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .skill-button {
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s, transform 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .skill-button:hover {
-      background: #555;
-      transform: scale(1.05);
-    }
-    .skill-button.selected {
-      background: #4CAF50;
-    }
-    .portfolio-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .project-card {
-      background: #e0e0e0;
-      padding: 1rem;
-      border-radius: 20px;
-      text-align: center;
-      flex: 1 1 150px;
-    }
-    .project-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    input, textarea, button {
-      padding: 0.75rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    button {
-      background: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(34, 34, 34, 0.9);
-      color: #fff;
-    }
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #333;
-      color: #fff;
-      padding: 1rem 1.5rem;
-      border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      z-index: 1000;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    @media (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const form = document.querySelector("form");
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        showToast("Сообщение отправлено! Ожидайте ответа в ближайшее время.");
-        form.reset();
-      });
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROLEX COLLECTION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      const sections = document.querySelectorAll("section");
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
-      sections.forEach(section => observer.observe(section));
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
 
-      document.querySelectorAll('.skill-button').forEach(button => {
-        button.addEventListener('click', () => {
-          const skill = button.dataset.skill;
-          button.classList.toggle('selected');
-          if (button.classList.contains('selected')) {
-            const checkIcon = document.createElement('span');
-            checkIcon.innerHTML = '✔';
-            checkIcon.classList.add('check-icon');
-            button.appendChild(checkIcon);
-            showToast(`Навык "${skill}" добавлен в базу данных!`);
-          } else {
-            const checkIcon = button.querySelector('.check-icon');
-            if (checkIcon) checkIcon.remove();
-            showToast(`Навык "${skill}" удалён из базы данных!`);
-          }
-        });
-      });
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-      function showToast(message) {
-        let toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerText = message;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 100);
-        setTimeout(() => {
-          toast.classList.remove('show');
-          setTimeout(() => toast.remove(), 400);
-        }, 3000);
-      }
-    });
-  </script>
-</head>
+        /* Loader Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeOut 2s ease-in-out 3s forwards;
+        }
+
+        .crown-loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid #333;
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #d4af37; }
+            to { text-shadow: 0 0 20px #d4af37, 0 0 30px #d4af37; }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideUp 1s ease-out 1s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #d4af37, #fff, #d4af37);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: slideUp 1s ease-out 1.5s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #d4af37, #f4e072);
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: slideUp 1s ease-out 2s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Collection Section */
+        .collection {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .watch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .watch-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .watch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .watch-card:hover::before {
+            opacity: 1;
+        }
+
+        .watch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .watch-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .watch-card:hover .watch-image {
+            transform: scale(1.05);
+        }
+
+        .watch-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #d4af37;
+        }
+
+        .watch-card p {
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .watch-button {
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .watch-button:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 3rem 0 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .watch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<script src="https://lib.youware.com/youware-lib.1747145198.js" id="yourware-lib"></script></head>
 <body>
-  <header>
-    <h1>Иван Иванов</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">О себе</a></li>
-        <li><a href="#skills">Навыки</a></li>
-        <li><a href="#portfolio">Портфолио</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="crown-loader"></div>
+    </div>
 
-  <main>
-    <section id="about">
-      <h2>О себе</h2>
-      <p>Я — начинающий веб-разработчик, увлечённый созданием красивых и удобных сайтов. Учусь, развиваюсь и стремлюсь к лучшему.</p>
-    </section>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">ROLEX</a>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="submariner">Коллекция</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section id="skills">
-      <h2>Навыки</h2>
-      <div class="skills-grid">
-        <button class="skill-button" data-skill="HTML">HTML</button>
-        <button class="skill-button" data-skill="CSS">CSS</button>
-        <button class="skill-button" data-skill="JavaScript">JavaScript</button>
-        <button class="skill-button" data-skill="Git">Git</button>
-      </div>
-    </section>
-
-    <section id="portfolio">
-      <h2>Портфолио</h2>
-      <div class="portfolio-grid">
-        <div class="project-card">
-          <img src="https://via.placeholder.com/500x300?text=Проект+1" alt="Проект 1" />
-          <p>Проект 1: Разработка корпоративного сайта</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="floating">ROLEX</h1>
+            <p>Часы, которые определяют время. Престиж, который длится вечно.</p>
+            <a href="#collection" class="cta-button">Изучить коллекцию</a>
         </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/500x300?text=Проект+2" alt="Проект 2" />
-          <p>Проект 2: Личный блог на CMS</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/500x300?text=Проект+3" alt="Проект 3" />
-          <p>Проект 3: Онлайн-магазин с интеграцией платежных систем</p>
-        </div>
-      </div>
     </section>
 
-    <section id="contact">
-      <h2>Связаться со мной</h2>
-      <form>
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="name" required />
+    <!-- Collection Section -->
+    <section class="collection" id="collection">
+        <div class="section-title fade-in">
+            <h2>Премиальная коллекция</h2>
+            <p>Откройте для себя изысканные часы, созданные с непревзойденным мастерством и вниманием к деталям</p>
+        </div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <div class="watch-grid">
+            <div class="watch-card fade-in">
+                <img src="https://public.youware.com/users-website-assets/prod/47ee9cd1-9f78-4d6b-9e8c-358e706d5556/gc57f6b1026871cbea89e7d7b1853aa82eb636853c244a42124901e7c86a600e2e9a82c22210e9b8fbd1056821705d743379112b7f2cd6ef6fdd246e736470205_1280.jpg" alt="Rolex Submariner" class="watch-image">
+                <h3>Submariner</h3>
+                <p>Легендарные водонепроницаемые часы для дайвинга с вращающимся безелем</p>
+                <div class="price">€8,950</div>
+                <button class="watch-button">Подробнее</button>
+            </div>
 
-        <label for="message">Сообщение:</label>
-        <textarea id="message" name="message" required></textarea>
+            <div class="watch-card fade-in">
+                <img src="https://public.youware.com/users-website-assets/prod/47ee9cd1-9f78-4d6b-9e8c-358e706d5556/g61d299c41ac835949268f745d92e40d6402dc91d1e417ba50a4c5de5df3a6ab9776e93cb5266de77c0d18b2eb84e8d674ccfc09de4d79b837f473037e341e8bc_1280.jpg" alt="Rolex GMT-Master" class="watch-image">
+                <h3>GMT-Master II</h3>
+                <p>Профессиональные часы для путешественников с двойным часовым поясом</p>
+                <div class="price">€9,700</div>
+                <button class="watch-button">Подробнее</button>
+            </div>
 
-        <button type="submit">Отправить</button>
-      </form>
+            <div class="watch-card fade-in">
+                <img src="https://public.youware.com/users-website-assets/prod/47ee9cd1-9f78-4d6b-9e8c-358e706d5556/g23f6bc36abfb20228746d38c9e9cd13a462e42f497b8027d8dd9e8b0acf9dd69644297e16eae348d5ef3356566e6879cca07887d4821bcecff568626293d15ae_1280.jpg" alt="Rolex Daytona" class="watch-image">
+                <h3>Daytona Gold</h3>
+                <p>Престижный хронограф из желтого золота для настоящих ценителей</p>
+                <div class="price">€37,800</div>
+                <button class="watch-button">Подробнее</button>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <p>&copy; 2025 Иван Иванов</p>
-  </footer>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h2>Наследие швейцарского мастерства</h2>
+                <p>С 1905 года Rolex устанавливает стандарты точности, водонепроницаемости и автоматического подзавода в мире часов.</p>
+                <p>Каждые часы Rolex - это результат непрерывного стремления к совершенству, соединяющий традиционное ремесло с передовыми технологиями.</p>
+                <p>От глубин океана до вершин Эвереста, часы Rolex сопровождают исследователей и первопроходцев в их самых амбициозных начинаниях.</p>
+            </div>
+            <div class="about-image fade-in">
+                <img src="https://public.youware.com/users-website-assets/prod/47ee9cd1-9f78-4d6b-9e8c-358e706d5556/g0087a5f95c53bc00840cde2e6e7a2b7a618fa6efcfc7bc921de63852792a8db1c53b6309ca69b626fc47b572b8accdb8a7432e421119f9903a054fcbb9e1a229_640.jpg" alt="Rolex Workshop">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Конфиденциальность</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Сервис</a>
+                <a href="#">Контакты</a>
+                <a href="#">Гарантия</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ROLEX. Все права защищены. A crown for every achievement.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Watch card hover effects
+        document.querySelectorAll('.watch-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        });
+
+        // Random sparkle effect
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.width = '4px';
+            sparkle.style.height = '4px';
+            sparkle.style.background = '#d4af37';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '9999';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.animation = 'sparkle 2s ease-in-out forwards';
+
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+
+        // Add sparkle keyframes
+        const sparkleStyles = `
+            @keyframes sparkle {
+                0% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = sparkleStyles;
+        document.head.appendChild(styleSheet);
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 3000);
+
+        // Button click animations
+        document.querySelectorAll('.watch-button, .cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = '50%';
+                ripple.style.top = '50%';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.marginLeft = '-50px';
+                ripple.style.marginTop = '-50px';
+
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const rippleStyles = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+
+        const rippleStyleSheet = document.createElement('style');
+        rippleStyleSheet.textContent = rippleStyles;
+        document.head.appendChild(rippleStyleSheet);
+    </script>
 </body>
 </html>
